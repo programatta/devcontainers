@@ -1,0 +1,11 @@
+services:
+  cpp_development:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile.local
+      args:
+        user: $USER
+    command: sleep infinity
+    container_name: cppdevelopment_container
+    volumes:
+      - ..:/code

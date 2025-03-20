@@ -1,0 +1,12 @@
+FROM debian:bookworm-slim
+
+ARG user
+
+RUN useradd -ms /bin/bash $user 
+RUN mkdir /code
+    
+RUN apt-get update && apt-get install -y git build-essential gdb make
+
+USER $user
+
+WORKDIR /code
