@@ -1,0 +1,14 @@
+services:
+  goebiten_development:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile.local
+      args:
+        user: $USER
+    environment:
+      - DISPLAY=$DISPLAY
+    command: sleep infinity
+    container_name: goebitendevelopment_container
+    volumes:
+      - ..:/code
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw

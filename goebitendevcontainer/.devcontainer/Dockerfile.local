@@ -1,0 +1,26 @@
+FROM debian:bookworm-slim
+
+ARG user
+
+ENV CMDLINE_GO_TOOLS_FILE=go1.24.1.linux-amd64.tar.gz
+ENV SDKS_HOME=/opt/sdks
+ENV GO_SDK_ROOT=${SDKS_HOME}/go
+ENV PATH="${GO_SDK_ROOT}/bin:${PATH}"
+
+RUN useradd -ms /bin/bash $user
+
+RUN mkdir /code && mkdir -p ${GO_SDK_ROOT}
+
+#Dependencias
+RUN apt-get update && apt-get install -y git build-essential gdb make wget tar \
+    libc6-dev libgl1-mesa-dev libxcursor-dev libxi-dev libxinerama-dev \
+    libxrandr-dev libxxf86vm-dev libasound2-dev pkg-config
+
+# sdk go.
+RUN wget --progress=dot:giga --tries=3 --waitretry=5 -O ${CMDLINE_GO_TOOLS_FILE} https://go.dev/dl/${CMDLINE_GO_TOOLS_FILE} \
+    && tar -xvf ${CMDLINE_GO_TOOLS_FILE} -C ${SDKS_HOME} \
+    && rm ${CMDLINE_GO_TOOLS_FILE}
+
+USER $user
+
+WORKDIR /code

@@ -1,0 +1,23 @@
+{
+    "name": "GoEbitenDevelopmentContainer",
+    "dockerComposeFile":"docker-compose.local.yml",
+    "service": "goebiten_development",
+    "workspaceFolder": "/code",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "editor.indentSize": "tabSize",
+                "editor.tabSize": 2,
+                "editor.insertSpaces": true,
+                "editor.detectIndentation": false
+            },
+            "extensions": [
+                "vscode-icons-team.vscode-icons",
+                "aaron-bond.better-comments",
+                "usernamehw.errorlens",
+                "golang.Go",
+                "premparihar.gotestexplorer"
+            ]
+        }
+    }
+}
