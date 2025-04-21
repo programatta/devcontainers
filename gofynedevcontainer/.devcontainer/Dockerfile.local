@@ -1,0 +1,32 @@
+FROM debian:bookworm-slim
+
+ARG user
+
+ENV CMDLINE_GO_TOOLS_FILE=go1.24.1.linux-amd64.tar.gz
+ENV SDKS_HOME=/opt/sdks
+ENV GO_SDK_ROOT=${SDKS_HOME}/go
+ENV GOPATH=/home/${user}/go
+ENV GOBIN=${GOPATH}/bin 
+ENV PATH="${GO_SDK_ROOT}/bin:${GOPATH}:${GOBIN}:${PATH}"
+
+RUN useradd -ms /bin/bash $user
+
+RUN mkdir /code && mkdir -p ${GO_SDK_ROOT}
+
+#Dependencias
+RUN apt-get update && apt-get install -y git build-essential gdb make wget tar \
+    libgl1-mesa-dev xorg-dev libxkbcommon-dev
+
+# sdk go.
+RUN wget --progress=dot:giga --tries=3 --waitretry=5 -O ${CMDLINE_GO_TOOLS_FILE} https://go.dev/dl/${CMDLINE_GO_TOOLS_FILE} \
+    && tar -xvf ${CMDLINE_GO_TOOLS_FILE} -C ${SDKS_HOME} \
+    && rm ${CMDLINE_GO_TOOLS_FILE}
+    
+USER $user
+
+# Utilidades de go:
+RUN go install -v golang.org/x/tools/gopls@latest \
+    && go install -v github.com/go-delve/delve/cmd/dlv@latest \
+    && go install -v fyne.io/fyne/v2/cmd/fyne@latest
+    
+WORKDIR /code

@@ -6,3 +6,6 @@ Contenedor para desarrollar con C y C++ (sin librerías).
 
 ## GOEbitenDevcontainer.
 Contenedor para desarrollar con Go y hacer uso de la librería Ebiten.
+
+## GOFyneDevcontainer.
+Contenedor para desarrollar con Go y hacer uso de la librería Fyne.
