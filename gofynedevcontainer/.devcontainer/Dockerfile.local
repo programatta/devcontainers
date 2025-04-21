@@ -27,6 +27,7 @@ USER $user
 # Utilidades de go:
 RUN go install -v golang.org/x/tools/gopls@latest \
     && go install -v github.com/go-delve/delve/cmd/dlv@latest \
+    && go install -v github.com/lukehoban/go-outline \
     && go install -v fyne.io/fyne/v2/cmd/fyne@latest
     
 WORKDIR /code
