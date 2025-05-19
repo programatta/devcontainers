@@ -7,8 +7,15 @@ services:
         user: $USER
     environment:
       - DISPLAY=$DISPLAY
+      - PULSE_SERVER=unix:$XDG_RUNTIME_DIR/pulse/native
+    devices:
+      - /dev/snd
+    group_add:
+      - audio
     command: sleep infinity
     container_name: goebitendevelopment_container
     volumes:
       - ..:/code
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - $XDG_RUNTIME_DIR/pulse/native:$XDG_RUNTIME_DIR/pulse/native
+      - ~/.config/pulse/cookie:/home/$USER/.config/pulse/cookie

@@ -16,7 +16,8 @@
                 "aaron-bond.better-comments",
                 "usernamehw.errorlens",
                 "golang.Go",
-                "premparihar.gotestexplorer"
+                "premparihar.gotestexplorer",
+                "766b.go-outliner"
             ]
         }
     }

@@ -14,7 +14,7 @@ RUN mkdir /code && mkdir -p ${GO_SDK_ROOT}
 #Dependencias
 RUN apt-get update && apt-get install -y git build-essential gdb make wget tar \
     libc6-dev libgl1-mesa-dev libxcursor-dev libxi-dev libxinerama-dev \
-    libxrandr-dev libxxf86vm-dev libasound2-dev pkg-config
+    libxrandr-dev libxxf86vm-dev libasound2-dev pkg-config pulseaudio
 
 # sdk go.
 RUN wget --progress=dot:giga --tries=3 --waitretry=5 -O ${CMDLINE_GO_TOOLS_FILE} https://go.dev/dl/${CMDLINE_GO_TOOLS_FILE} \
